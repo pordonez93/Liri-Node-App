@@ -11,7 +11,7 @@ var liriSubject = process.argv.slice(3).join(" ");
 
 switch(liriArgument) {
     case"spotify-this-song":
-    spotifySong(liriSubject);
+    spotifyThis(liriSubject);
     break;
     
     case "concert-this":
@@ -23,7 +23,7 @@ switch(liriArgument) {
     break;
 
     case "do-what-it-says":
-    iWantItThatWay();
+    randomThis();
     break;
 
     default:
@@ -37,7 +37,7 @@ switch(liriArgument) {
         in qutation marks if it is more than one word!`);
 };
 
-function spotifySong(songName){
+function spotifyThis(songName){
     if(!songName){
         songName = "The Sign by Ace of Base";
     }spotify.search({
@@ -73,8 +73,6 @@ function concertThis (artist) {
     })
 }
 
-
-
 function movieThis(movieName){
     if(!movieName) {
         movieName = "Mr Nobody";
@@ -102,3 +100,16 @@ function movieThis(movieName){
         }
     })
 }
+
+function randomThis(){
+    fs.readFile("random.txt", "utf8", function(err, data){
+        if(err) {
+            console.log('Error occurred: ' + err);
+            return;
+        }else{
+            randomThisResults = data.split(",");
+            spotifyThis(randomThisResults[1]);
+        }
+    })
+};
+
