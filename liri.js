@@ -59,5 +59,18 @@ function spotifySong(songName){
     })
 }
 
+function concertThis (artist) {
+    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+
+    axios.get(queryURL)
+    .then(function(response){
+        output = 
+        "Venue: " + response.data[0].venue.name + "\r\n" +
+        "Location: " + response.data[0].venue.city + "\r\n" +
+        "Date of Event: " + moment(response.data[0].datetime).format("MM/DD/YYYY");
+
+        console.log(output);
+    })
+}
 
 
