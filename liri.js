@@ -74,3 +74,31 @@ function concertThis (artist) {
 }
 
 
+
+function movieThis(movieName){
+    if(!movieName) {
+        movieName = "Mr Nobody";
+    }
+    let queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=749f962f";
+
+    request(queryURL, function(err, response, body){
+        if(err) {
+            console.log('Error occurred: ' + err);
+            return;
+        }else{
+            let jsonData = JSON.parse(body);
+
+            output=
+            "Title: " + jsonData.Title + "\r\n" +
+            "Year: " + jsonData.Year + "\r\n" +
+            "IMDB Rating: " + jsonData.imdbRating + "\r\n" +
+            "Rotten Tomatoes Rating: " +jsonData.Ratings[1].Value + "\r\n" +
+            "Country: " + jsonData.Country + "\r\n" +
+            "Language: " + jsonData.Language + "\r\n" +
+            "Plot: " + jsonData.Plot + "\r\n" +
+            "Actors: " + jsonData.Actors + "\r\n";
+
+            console.log(output);
+        }
+    })
+}
